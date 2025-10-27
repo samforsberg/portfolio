@@ -242,7 +242,6 @@ body {
 ========================================================= */
 .about {
     padding: 8rem 2rem;
-    background: #111;
 }
 
 .about-content {
@@ -345,7 +344,6 @@ body {
 ========================================================= */
 .contact {
     padding: 8rem 2rem;
-    background: #0a0a0a;
 }
 
 .contact-content {
@@ -658,3 +656,4 @@ body {
 @media (prefers-reduced-motion: reduce) {
     #bg-canvas { display: none; }
 }
+
