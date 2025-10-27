@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sam Forsberg | 3D Printing Engineer</title>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+  <!-- Enhancements needed by the new JS (keep minimal to avoid conflicts with style.css) -->
+  <style>
+    /* ===== Scroll Reveal System (pairs with main.js) ===== */
+    :root {
+      --reveal-distance: 28px;
+      --reveal-duration: 600ms;
+      --reveal-ease: cubic-bezier(.21,.61,.35,1);
+    }
+    .reveal{
+      opacity:0;
+      transform:translateY(var(--reveal-distance));
+      filter:blur(6px);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        transform var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease);
+      will-change:opacity,transform,filter;
+      transition-delay: var(--d, 0ms);
+    }
+    .reveal-up{ transform: translateY(var(--reveal-distance)); }
+    .reveal-down{ transform: translateY(calc(var(--reveal-distance) * -1)); }
+    .reveal-left{ transform: translateX(var(--reveal-distance)); }
+    .reveal-right{ transform: translateX(calc(var(--reveal-distance) * -1)); }
+    .reveal-scale{ transform: scale(.96); }
+    .reveal.in-view{ opacity:1; transform:none; filter:none; }
+
+    /* Parallax wrapper hook */
+    .parallax-wrap{ perspective: 800px; contain: paint; }
+    .parallax{ will-change: transform; transform: translateZ(0); }
+
+    /* Navbar link effects (if not already in style.css) */
+    .nav-links a{
+      position:relative;
+      color:#fff;
+      text-decoration:none;
+      font-weight:500;
+      padding:0.5rem 0;
+      font-size:1rem;
+      background: linear-gradient(90deg,#00ff88,#00ccff);
+      background-size:200%;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      transition: background-position .4s ease, text-shadow .4s ease;
+    }
+    .nav-links a:hover{
+      background-position:100%;
+      text-shadow:0 0 8px rgba(0,255,136,.6),0 0 12px rgba(0,204,255,.4);
+    }
+    .nav-links a::after{
+      content:'';
+      position:absolute;
+      left:0; bottom:-3px;
+      width:0%; height:2px;
+      background: linear-gradient(90deg,#00ff88,#00ccff);
+      box-shadow:0 0 8px rgba(0,255,136,.7);
+      transition: width .3s ease;
+    }
+    .nav-links a:hover::after{ width:100%; }
+    .nav-links a.active{ text-shadow:0 0 10px rgba(0,255,136,.8); }
+
+    /* Cool name effect (if not already in style.css) */
+    .logo-text{
+      font-weight:700;
+      font-size:1.5rem;
+      letter-spacing:1px;
+      background: linear-gradient(90deg,#00ff88,#00ccff,#00ff88);
+      background-size:200%;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation: nameGlow 4s ease-in-out infinite alternate;
+      text-shadow: 0 0 8px rgba(0,255,136,.3), 0 0 12px rgba(0,204,255,.2);
+      transition: transform .3s ease, text-shadow .3s ease;
+    }
+    .logo-text:hover{
+      transform: scale(1.05);
+      text-shadow: 0 0 15px rgba(0,255,136,.8), 0 0 25px rgba(0,204,255,.6);
+      animation: shine 2s linear infinite;
+    }
+    @keyframes nameGlow{
+      0%{ background-position:0% 50%; }
+      100%{ background-position:100% 50%; }
+    }
+    @keyframes shine{
+      0%{ background-position:0% 50%; }
+      100%{ background-position:200% 50%; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .reveal, .reveal.in-view, .parallax, .logo-text{
+        transition:none !important; animation:none !important; transform:none !important; filter:none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- Modern Glass Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="#home" class="logo">
+        <span class="logo-text">Sam Forsberg</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero parallax-wrap">
+    <div class="hero-content">
+      <div class="hero-badge parallax" data-depth="1">3D Printing Specialist Since 2016</div>
+      <h1 class="hero-title parallax" data-depth="2">Transforming Ideas<br/>Into Physical Reality</h1>
+      <p class="hero-subtitle parallax" data-depth="3">
+        Mechanical Engineer & Additive Manufacturing Expert<br/>Based in Boulder, Colorado
+      </p>
+    </div>
+    <div class="scroll-indicator"></div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="projects">
+    <h2 class="section-title reveal reveal-up">Signature Creations</h2>
+
+    <div class="projects-grid">
+      <article class="project-card reveal reveal-up reveal-card">
+        <div class="project-image">
+          <img src="PLANE.JPG" alt="Aerodynamic Plane">
+          <div class="project-tech"> Foaminf PLA & TPU | Fusion 360 | Voron 2.4</div>
+        </div>
+        <div class="project-info">
+          <h3>High-Velocity 3D printed Plane</h3>
+          <p>Designed and printed lightweight aerodynamic frame capable of withstanding 15G forces. Reduced print time by 40% through custom slicer profiles. Utilized engineering materials to maintain a lightweight glider, with carbon fiber reinforced spars to increase durability</p>
+          <a href="#" class="project-link">More Info</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal reveal-up reveal-card" style="--d:90ms">
+        <div class="project-image">
+          <img src="CUBE.JPG" alt="Light Cube">
+          <div class="project-tech">PLA | Custom Software | Arachne Slicing </div>
+        </div>
+        <div class="project-info">
+          <h3>Custom Light Display</h3>
+          <p>Used SolidWorks to design and build a light display featuring 1000 LEDs and double sided mirrors.</p>
+          <a href="#" class="project-link">See More</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal reveal-up reveal-card" style="--d:90ms">
+        <div class="project-image">
+          <img src="PRINTER.JPG" alt="Voron 2.4 3D printer">
+          <div class="project-tech">PLA | Custom Software | Arachne Slicing </div>
+        </div>
+        <div class="project-info">
+          <h3>3D printer</h3>
+          <p>Used other 3D printed parts to build a 3D printer from scratch that is capable of printing at 500 C&deg; and at high speeds. This printer was used to manufacture the Cube and the Plane.</p>
+          <a href="#" class="project-link">See More</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="about-content">
+      <h2 class="section-title reveal reveal-up">From CAD to Reality</h2>
+      <div class="about-grid">
+        <div class="about-image reveal reveal-left">
+          <img src="sam.jpg" alt="Sam Forsberg">
+        </div>
+        <div class="about-text reveal reveal-right">
+          <p class="intro-text">
+            Hey! I'm Sam - a mechanical engineer specializing in advanced additive manufacturing solutions.
+            With over 3 years of professional experience and almost 10 years of personal experience, I bridge the gap between digital design and physical production.
+          </p>
+
+          <div class="expertise">
+            <h3>Core Expertise</h3>
+            <ul>
+              <li>High-speed FDM/FFF systems optimization</li>
+              <li>IoT devices</li>
+              <li>Low frequency devices</li>
+              <li>Custom printer firmware development</li>
+              <li>Advanced material research</li>
+            </ul>
+          </div>
+
+          <div class="skills">
+            <div class="skill">CAD Design</div>
+            <div class="skill">Klipper Expert</div>
+            <div class="skill">Python Automation</div>
+            <div class="skill">PCB design</div>
+            <div class="skill">PL300 Certified</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT (anchor target for nav) -->
+  <section id="contact" class="contact">
+    <div class="contact-content">
+      <h2 class="section-title reveal reveal-up">Contact</h2>
+      <p class="contact-text reveal reveal-up" style="--d:90ms">
+        Want to collaborate or have a project in mind? Let’s talk.
+      </p>
+      <div class="contact-methods reveal reveal-up" style="--d:180ms">
+        <a href="mailto:sam@forsberg3d.com" class="project-link"><i class="fas fa-envelope"></i>   Email Me</a>
+        <a href="https://github.com/samforsberg" target="_blank" class="project-link"><i class="fab fa-github"></i>   GitHub</a>
+        <a href="https://linkedin.com/in/samforsberg06" target="_blank" class="project-link"><i class="fab fa-linkedin"></i>   LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (thin layout; your style.css controls spacing) -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-logo">Sam Forsberg</span>
+        <p>Pushing the boundaries of additive manufacturing</p>
+      </div>
+      <div class="footer-contact">
+        <div class="social-box">
+          <a href="https://linkedin.com/in/samforsberg06" target="_blank" aria-label=" LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/samforsberg" target="_blank" aria-label=" GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <div class="email-box">
+          <a href="mailto:sam@forsberg3d.com" class="contact-link">
+            <i class="fas fa-envelope"></i> samforsberg@outlook.com
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2025 Sam Forsberg
+    </div>
+  </footer>
+
+  <!-- Main script -->
+  <script src="main.js"></script>
+</body>
+</html>
