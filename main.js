@@ -137,100 +137,111 @@ window.addEventListener('load', () => {
   if (!canvas) return;
   const ctx = canvas.getContext('2d', { alpha: true });
 
-  // ----- sizing -----
-  const DPR = Math.min(window.devicePixelRatio || 1, 2); // cap DPR for perf
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
   function resize() {
-    const { innerWidth:w, innerHeight:h } = window;
-    canvas.width  = Math.floor(w * DPR);
+    const { innerWidth: w, innerHeight: h } = window;
+    canvas.width = Math.floor(w * DPR);
     canvas.height = Math.floor(h * DPR);
-    canvas.style.width  = w + 'px';
+    canvas.style.width = w + 'px';
     canvas.style.height = h + 'px';
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   }
   resize();
   window.addEventListener('resize', resize);
 
-  // ----- particle system -----
+  // === particle setup ===
   const P = [];
-  const COUNT = Math.floor((window.innerWidth * window.innerHeight) / 19000) + 40; // responsive count
+  const COUNT = Math.floor((window.innerWidth * window.innerHeight) / 19000) + 40;
   const COLORS = ['#00ff88', '#00ccff', '#a0fff0', '#7fffd4'];
+  function rand(a, b) { return a + Math.random() * (b - a); }
 
-  function rand(a,b){ return a + Math.random()*(b-a); }
-
-  for (let i=0;i<COUNT;i++){
+  for (let i = 0; i < COUNT; i++) {
     P.push({
       x: rand(0, innerWidth),
       y: rand(0, innerHeight),
-      vx: rand(-0.3, 0.3),
-      vy: rand(-0.3, 0.3),
+      vx: rand(-0.1, 0.1),  // slower speed
+      vy: rand(-0.1, 0.1),
       r: rand(1.2, 2.6),
       c: COLORS[i % COLORS.length],
-      life: rand(0, 1)
     });
   }
 
-  // mouse influence
   const mouse = { x: -9999, y: -9999, down: false };
   window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
   window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
   window.addEventListener('mousedown', () => mouse.down = true);
-  window.addEventListener('mouseup',   () => mouse.down = false);
+  window.addEventListener('mouseup', () => mouse.down = false);
 
-  // ----- animation loop -----
+  // === animation ===
   let last = performance.now();
-  function tick(t){
-    const dt = Math.min(33, t - last); last = t;
+  function tick(t) {
+    const dt = Math.min(33, t - last);
+    last = t;
 
-    // subtle glassy background wash
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    const gx = (Math.sin(t*0.0002)+1)/2 * innerWidth;
-    const gy = (Math.cos(t*0.00025)+1)/2 * innerHeight;
-    const grad = ctx.createRadialGradient(gx, gy, 50, innerWidth/2, innerHeight/2, Math.max(innerWidth, innerHeight));
-    grad.addColorStop(0, 'rgba(0,255,136,0.06)');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // soft ambient glow
+    const gx = (Math.sin(t * 0.0002) + 1) / 2 * innerWidth;
+    const gy = (Math.cos(t * 0.00025) + 1) / 2 * innerHeight;
+    const grad = ctx.createRadialGradient(gx, gy, 50, innerWidth / 2, innerHeight / 2, Math.max(innerWidth, innerHeight));
+    grad.addColorStop(0, 'rgba(0,255,136,0.05)');
     grad.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = grad;
-    ctx.fillRect(0,0,innerWidth,innerHeight);
+    ctx.fillRect(0, 0, innerWidth, innerHeight);
 
-    // draw links between close particles for “web” effect
     ctx.lineWidth = 1;
-    for (let i=0;i<P.length;i++){
+
+    for (let i = 0; i < P.length; i++) {
       const a = P[i];
-      // physics
-      a.x += a.vx * dt * 0.06;
-      a.y += a.vy * dt * 0.06;
+      a.x += a.vx;
+      a.y += a.vy;
+
+      // gentle damping to prevent runaway speeds
+      a.vx *= 0.98;
+      a.vy *= 0.98;
 
       // wrap edges
-      if (a.x < -5) a.x = innerWidth + 5;
-      if (a.x > innerWidth + 5) a.x = -5;
-      if (a.y < -5) a.y = innerHeight + 5;
-      if (a.y > innerHeight + 5) a.y = -5;
+      if (a.x < 0) a.x = innerWidth;
+      if (a.x > innerWidth) a.x = 0;
+      if (a.y < 0) a.y = innerHeight;
+      if (a.y > innerHeight) a.y = 0;
 
-      // mouse repulsion / attraction
-      const dx = a.x - mouse.x, dy = a.y - mouse.y;
-      const d2 = dx*dx + dy*dy;
+      // mouse influence (softened)
+      const dx = a.x - mouse.x;
+      const dy = a.y - mouse.y;
+      const d2 = dx * dx + dy * dy;
       const maxDist = 140;
-      if (d2 < maxDist*maxDist){
+      if (d2 < maxDist * maxDist) {
         const d = Math.sqrt(d2) || 1;
-        const f = (mouse.down ? -0.9 : 0.9) * (1 - d / maxDist); // hold mouse to attract
-        a.vx += (dx/d) * f * 0.08;
-        a.vy += (dy/d) * f * 0.08;
+        const force = 0.03 * (1 - d / maxDist);
+        a.vx += (dx / d) * force * (mouse.down ? -1 : 1);
+        a.vy += (dy / d) * force * (mouse.down ? -1 : 1);
+      }
+
+      // speed clamp (never let them get too fast)
+      const speed = Math.hypot(a.vx, a.vy);
+      const maxSpeed = 0.4; // pixels per frame
+      if (speed > maxSpeed) {
+        a.vx = (a.vx / speed) * maxSpeed;
+        a.vy = (a.vy / speed) * maxSpeed;
       }
 
       // draw particle
       ctx.beginPath();
       ctx.fillStyle = a.c;
-      ctx.globalAlpha = 0.75;
-      ctx.arc(a.x, a.y, a.r, 0, Math.PI*2);
+      ctx.globalAlpha = 0.7;
+      ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
       ctx.fill();
 
-      // connect to neighbors (limit work)
-      for (let j=i+1;j<i+20 && j<P.length;j++){
+      // link lines (short range only)
+      for (let j = i + 1; j < P.length; j++) {
         const b = P[j];
-        const ddx = a.x - b.x, ddy = a.y - b.y;
-        const dist2 = ddx*ddx + ddy*ddy;
-        if (dist2 < 95*95){
-          const op = 1 - (Math.sqrt(dist2)/95);
-          ctx.globalAlpha = op * 0.25;
+        const ddx = a.x - b.x;
+        const ddy = a.y - b.y;
+        const dist2 = ddx * ddx + ddy * ddy;
+        if (dist2 < 90 * 90) {
+          const op = 1 - Math.sqrt(dist2) / 90;
+          ctx.globalAlpha = op * 0.2;
           ctx.strokeStyle = '#9bfcd8';
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -239,9 +250,10 @@ window.addEventListener('load', () => {
         }
       }
     }
-    ctx.globalAlpha = 1;
 
+    ctx.globalAlpha = 1;
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
 })();
+
