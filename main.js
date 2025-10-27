@@ -245,31 +245,3 @@ window.addEventListener('load', () => {
   }
   requestAnimationFrame(tick);
 })();
-</script>
-quick style swaps
-A) “Liquid blobs” gradient (no particles, ultra-smooth)
-Replace the animation loop body with this simpler blob render (keep the sizing + RAF wrapper):
-
-js
-Copy code
-// inside tick(t):
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-// animated multi-radial gradient blobs
-const w = innerWidth, h = innerHeight;
-const t1 = t * 0.00025, t2 = t * 0.00018, t3 = t * 0.00021;
-
-function blob(cx, cy, r, color) {
-  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-  grad.addColorStop(0, color);
-  grad.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, Math.PI*2);
-  ctx.fill();
-}
-
-// drifting centers
-blob(w*(0.2 + 0.1*Math.sin(t1)), h*(0.4 + 0.1*Math.cos(t1*1.3)), Math.max(w,h)*0.45, 'rgba(0,255,136,0.24)');
-blob(w*(0.75 + 0.08*Math.cos(t2)), h*(0.3 + 0.12*Math.sin(t2*1.2)), Math.max(w,h)*0.5,  'rgba(0,204,255,0.22)');
-blob(w*(0.45 + 0.12*Math.cos(t3)), h*(0.85 + 0.08*Math.sin(t3)),   Math.max(w,h)*0.4,  'rgba
