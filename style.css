@@ -555,3 +555,26 @@ body {
 @media (prefers-reduced-motion: reduce) {
     .reveal, .parallax { transition: none !important; animation: none !important; }
 }
+
+/* ===== Interactive Background Canvas ===== */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;                 /* sits behind everything */
+  pointer-events: none;        /* clicks go to content */
+  background: radial-gradient(1200px 800px at 20% 20%, #08110e 0%, #0a0a0a 60%);
+  opacity: 0.8;                /* blend with your dark theme */
+}
+
+/* stronger glass vibe behind the navbar only (optional) */
+.navbar {
+  isolation: isolate;          /* keeps canvas effects behind pseudo elements */
+}
+
+/* honor reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  #bg-canvas { display: none; }
+}
+
