@@ -135,6 +135,8 @@ body {
 ========================================================= */
 .projects {
     padding: 8rem 2rem;
+    position: relative;
+    z-index: 1; /* keep above canvas */
 }
 
 .section-title {
@@ -242,6 +244,8 @@ body {
 ========================================================= */
 .about {
     padding: 8rem 2rem;
+    position: relative;
+    z-index: 1; /* above canvas */
 }
 
 .about-content {
@@ -344,6 +348,8 @@ body {
 ========================================================= */
 .contact {
     padding: 8rem 2rem;
+    position: relative;
+    z-index: 1; /* above canvas */
 }
 
 .contact-content {
@@ -384,6 +390,8 @@ body {
     margin-top: 2rem;
     border-top: 1px solid rgba(255,255,255,0.1);
     width: 100%;
+    position: relative;
+    z-index: 1; /* above canvas */
 }
 
 .footer-content {
@@ -656,4 +664,63 @@ body {
     #bg-canvas { display: none; }
 }
 
+/* =========================================================
+   ✨ Neon Gradient Section Divider (non-blocking)
+========================================================= */
+.section-divider {
+    position: relative;
+    width: 100%;
+    height: 100px;              /* visual space between sections */
+    pointer-events: none;       /* no interaction */
+    z-index: 1;                 /* above canvas, below nav */
+    overflow: visible;
+}
 
+.section-divider::before {
+    /* crisp glowing line centered */
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(72%, 980px);
+    height: 2px;
+    background: linear-gradient(90deg,
+        rgba(0,0,0,0) 0%,
+        #00ff88 18%,
+        #00ccff 50%,
+        #00ff88 82%,
+        rgba(0,0,0,0) 100%);
+    filter:
+      drop-shadow(0 0 10px rgba(0,255,136,0.55))
+      drop-shadow(0 0 16px rgba(0,204,255,0.45));
+    opacity: 0.95;
+}
+
+.section-divider::after {
+    /* soft ambient glow that fades to transparent */
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(78%, 1100px);
+    height: 100%;
+    background:
+      radial-gradient(60% 120% at 50% 50%, rgba(0,255,136,0.15), transparent 70%),
+      radial-gradient(60% 120% at 50% 50%, rgba(0,204,255,0.12), transparent 72%);
+    filter: blur(18px);
+    opacity: 0.55;
+    mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+}
+
+/* subtle shimmer on scroll (respects reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .section-divider::before {
+    animation: dividerShift 10s ease-in-out infinite alternate;
+  }
+  @keyframes dividerShift {
+    from { transform: translate(-50%, -50%) scaleX(1); }
+    to   { transform: translate(-50%, -50%) scaleX(1.04); }
+  }
+}
