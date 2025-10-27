@@ -469,7 +469,10 @@ body {
 .logo-icon {
     font-size: 1.8rem;
 }
-
+.logo-img {
+  height: 40px;   /* Adjust smaller or larger */
+  width: auto;    /* Keeps proportions */
+}
 .logo-text {
     font-weight: 700;
     font-size: 1.5rem;
@@ -652,4 +655,5 @@ body {
       filter: none !important;
     }
   }
+
   
