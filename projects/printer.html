@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>High-Performance 3D Printer | Sam Forsberg</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <div class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="../index.html#home" class="logo">
+        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
+        <span class="logo-text">Sam Forsberg</span>
+      </a>
+      <a href="../index.html#projects" class="project-link" style="margin-left:auto;">
+        ← Back to Projects
+      </a>
+    </div>
+  </nav>
+
+  <section class="projects">
+    <h1 class="section-title reveal reveal-up">High-Performance 3D Printer</h1>
+
+    <div class="about-grid">
+      <div class="about-image reveal reveal-left">
+        <img src="../resources/projects/PRINTER.JPG" alt="High performance Voron-style 3D printer" />
+      </div>
+
+      <div class="about-text reveal reveal-right">
+        <p class="intro-text">
+          This printer was built from scratch using mostly 3D printed parts and open-source hardware.
+          It’s tuned for high-speed, high-temperature printing and is the workhorse behind the plane,
+          cube, and a lot of client parts.
+        </p>
+
+        <div class="expertise">
+          <h3>Hardware & Capabilities</h3>
+          <ul class="about-list">
+            <li>CoreXY layout with rigid frame and direct-drive toolhead for clean motion at high accelerations.</li>
+            <li>All-metal hotend capable of 500&nbsp;&deg;C and enclosed build volume for engineering plastics.</li>
+            <li>Custom wiring and cable management to keep the motion system light and serviceable.</li>
+          </ul>
+        </div>
+
+        <div class="expertise">
+          <h3>Firmware & Calibration</h3>
+          <ul class="about-list">
+            <li>Klipper-based firmware with pressure advance, input shaping, and tuned acceleration profiles.</li>
+            <li>Custom macros for material swaps, nozzle cleaning, and repeatable calibration routines.</li>
+            <li>Dialed in profiles for PLA, PETG, ASA, Nylon, and flexible materials.</li>
+          </ul>
+        </div>
+
+        <div class="skills">
+          <div class="skill">CoreXY Kinematics</div>
+          <div class="skill">Klipper Firmware</div>
+          <div class="skill">High-Temp Printing</div>
+          <div class="skill">Printer Assembly</div>
+          <div class="skill">Process Tuning</div>
+        </div>
+
+        <a href="../index.html#contact" class="project-link">
+          <i class="fas fa-cogs"></i> Build / Upgrade a Printer
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
+        <span class="footer-logo">Sam Forsberg</span>
+        <p>Pushing the boundaries of additive manufacturing</p>
+      </div>
+      <div class="footer-contact">
+        <div class="social-box">
+          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/samforsberg" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <div class="email-box">
+          <a href="mailto:sam@forsberg3d.com" class="contact-link">
+            <i class="fas fa-envelope"></i> samforsberg@outlook.com
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2025 Sam Forsberg
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>

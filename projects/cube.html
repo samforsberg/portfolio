@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Light Display | Sam Forsberg</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <div class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="../index.html#home" class="logo">
+        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
+        <span class="logo-text">Sam Forsberg</span>
+      </a>
+      <a href="../index.html#projects" class="project-link" style="margin-left:auto;">
+        ← Back to Projects
+      </a>
+    </div>
+  </nav>
+
+  <section class="projects">
+    <h1 class="section-title reveal reveal-up">Custom Light Display</h1>
+
+    <div class="about-grid">
+      <div class="about-image reveal reveal-left">
+        <img src="../resources/projects/CUBE.JPG" alt="Custom LED Light Cube" />
+      </div>
+
+      <div class="about-text reveal reveal-right">
+        <p class="intro-text">
+          This cube is a fully custom light sculpture built around ~1000 individually-addressable LEDs,
+          double-sided mirrors, and a 3D printed structure that hides wiring while still letting the light breathe.
+        </p>
+
+        <div class="expertise">
+          <h3>Design & Hardware</h3>
+          <ul class="about-list">
+            <li>SolidWorks for parametric frame design, snap-fit panels, and mirror recesses.</li>
+            <li>3D printed PLA structure tuned for even light diffusion and clean cable routing.</li>
+            <li>Dense LED matrix layout with respect to thermals, accessibility, and serviceability.</li>
+          </ul>
+        </div>
+
+        <div class="expertise">
+          <h3>Software & Animations</h3>
+          <ul class="about-list">
+            <li>Custom animation engine to generate 3D patterns, waves, and audio-reactive effects.</li>
+            <li>Configurable scenes: ambient modes, “showcase” patterns, and low-brightness night presets.</li>
+            <li>Optimized update loop to keep transitions smooth while staying within power budget.</li>
+          </ul>
+        </div>
+
+        <div class="skills">
+          <div class="skill">SolidWorks</div>
+          <div class="skill">LED Mapping</div>
+          <div class="skill">Custom Firmware</div>
+          <div class="skill">Arachne Slicing</div>
+          <div class="skill">3D Printed Enclosures</div>
+        </div>
+
+        <a href="../index.html#contact" class="project-link">
+          <i class="fas fa-lightbulb"></i> Discuss Light Installations
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
+        <span class="footer-logo">Sam Forsberg</span>
+        <p>Pushing the boundaries of additive manufacturing</p>
+      </div>
+      <div class="footer-contact">
+        <div class="social-box">
+          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/samforsberg" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <div class="email-box">
+          <a href="mailto:sam@forsberg3d.com" class="contact-link">
+            <i class="fas fa-envelope"></i> samforsberg@outlook.com
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2025 Sam Forsberg
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>

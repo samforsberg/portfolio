@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>High-Velocity 3D Printed Plane | Sam Forsberg</title>
+
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Loader -->
+  <div class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="../index.html#home" class="logo">
+        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
+        <span class="logo-text">Sam Forsberg</span>
+      </a>
+      <a href="../index.html#projects" class="project-link" style="margin-left:auto;">
+        ← Back to Projects
+      </a>
+    </div>
+  </nav>
+
+  <!-- Plane Project -->
+  <section class="projects">
+    <h1 class="section-title reveal reveal-up">High-Velocity 3D Printed Plane</h1>
+
+    <div class="about-grid">
+      <div class="about-image reveal reveal-left">
+        <img src="../resources/projects/PLANE.JPG" alt="High-Velocity 3D Printed Plane" />
+      </div>
+
+      <div class="about-text reveal reveal-right">
+        <p class="intro-text">
+          This plane started as a stress test for high-speed printing and turned into a platform
+          for playing with aerodynamics, structural optimization, and slicer tuning. It’s designed
+          to survive launches, hard landings, and sustained loads up to ~15&nbsp;g.
+        </p>
+
+        <div class="expertise">
+          <h3>Build Overview</h3>
+          <ul class="about-list">
+            <li>Modeled in Fusion 360 with separate control surfaces, spars, and modular nose sections.</li>
+            <li>Printed in foaming PLA for low-mass skins and TPU for impact-resistant nose and wingtips.</li>
+            <li>Carbon fiber spars embedded during printing to stiffen the wings and fuselage spine.</li>
+          </ul>
+        </div>
+
+        <div class="expertise">
+          <h3>What I Focused On</h3>
+          <ul class="about-list">
+            <li>Reducing print time by ~40% using custom profiles, gyroid infill, and aggressive accelerations.</li>
+            <li>Balancing stiffness vs. weight by iterating wall thickness, rib spacing, and spar placement.</li>
+            <li>Designing around real hardware: battery bay, servo pockets, wire channels, and CG tuning options.</li>
+          </ul>
+        </div>
+
+        <div class="skills">
+          <div class="skill">Fusion 360</div>
+          <div class="skill">Foaming PLA</div>
+          <div class="skill">TPU</div>
+          <div class="skill">Voron 2.4</div>
+          <div class="skill">Flight Hardware Integration</div>
+        </div>
+
+        <a href="../index.html#contact" class="project-link">
+          <i class="fas fa-paper-plane"></i> Talk About Custom Airframes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
+        <span class="footer-logo">Sam Forsberg</span>
+        <p>Pushing the boundaries of additive manufacturing</p>
+      </div>
+      <div class="footer-contact">
+        <div class="social-box">
+          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/samforsberg" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <div class="email-box">
+          <a href="mailto:sam@forsberg3d.com" class="contact-link">
+            <i class="fas fa-envelope"></i> samforsberg@outlook.com
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2025 Sam Forsberg
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
