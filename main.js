@@ -275,42 +275,52 @@ window.addEventListener('load', () => {
   requestAnimationFrame(tick);
 })();
 
-// ===== Page transitions (no flicker) =====
+// ===== Page transitions (less glitchy, no intro, safe with back button) =====
 (() => {
   const transition = document.querySelector('.page-transition');
   if (!transition) return;
 
-  // On page load: fade from overlay -> page
-  window.addEventListener('load', () => {
-    transition.classList.add('page-transition--intro');
-    const handleIntroEnd = () => {
-      transition.classList.remove('page-transition--intro');
-      transition.removeEventListener('animationend', handleIntroEnd);
-    };
-    transition.addEventListener('animationend', handleIntroEnd);
-  });
+  let navigating = false;
+
+  const resetOverlay = () => {
+    navigating = false;
+    transition.classList.remove('page-transition--active', 'page-transition--intro');
+  };
+
+  // Clean state on initial load and when coming back via back/forward cache
+  resetOverlay();
+  window.addEventListener('pageshow', resetOverlay);
 
   // Global helper for smooth navigation
   window.__pageTransitionNavigate = function (url, newTab = false) {
-    if (!transition || !url) {
+    if (!url || navigating) {
+      if (!navigating && url) {
+        // fallback if something is weird with the overlay
+        if (newTab) window.open(url, '_blank');
+        else window.location.href = url;
+      }
+      return;
+    }
+
+    // If no transition element for some reason, just go
+    if (!transition) {
       if (newTab) window.open(url, '_blank');
       else window.location.href = url;
       return;
     }
 
-    const go = () => {
+    navigating = true;
+
+    // Make sure intro class is gone and trigger the "out" animation
+    transition.classList.remove('page-transition--intro');
+    transition.classList.add('page-transition--active');
+
+    const handleOutEnd = () => {
+      transition.removeEventListener('animationend', handleOutEnd);
       if (newTab) window.open(url, '_blank');
       else window.location.href = url;
     };
 
-    // If we're already in an intro animation, clear it
-    transition.classList.remove('page-transition--intro');
-
-    transition.classList.add('page-transition--active');
-    const handleOutEnd = () => {
-      transition.removeEventListener('animationend', handleOutEnd);
-      go();
-    };
     transition.addEventListener('animationend', handleOutEnd);
   };
 })();
