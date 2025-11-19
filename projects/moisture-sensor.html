@@ -1,108 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>In-Wall Moisture Sensors | Sam Forsberg</title>
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IoT Moisture Sensor Node | Sam Forsberg</title>
+  <link rel="stylesheet" href="../project-style.css" />
 </head>
 <body>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="page-transition"></div>
 
-  <div class="loader">
-    <div class="loader-spinner"></div>
-  </div>
+  <header class="proj-header">
+    <a href="../index.html" class="back-link">Back to portfolio</a>
+  </header>
 
-  <nav class="navbar">
-    <div class="nav-content">
-      <a href="../index.html#home" class="logo">
-        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="logo-text">Sam Forsberg</span>
-      </a>
-      <a href="../index.html#projects" class="project-link" style="margin-left:auto;">
-        ← Back to Projects
-      </a>
-    </div>
-  </nav>
+  <main class="proj-main">
+    <!-- HERO -->
+    <section class="proj-hero">
+      <div class="proj-eyebrow">Project · Embedded hardware</div>
+      <h1>IoT Moisture Sensor Node</h1>
+      <p class="proj-tagline">
+        A low-power sensor node designed to live in walls and crawlspaces, watching for moisture
+        before it becomes damage. Built around reliable readings, long battery life, and a simple deployment story.
+      </p>
 
-  <section class="projects">
-    <h1 class="section-title reveal reveal-up">In-Wall Moisture Sensors</h1>
-
-    <div class="about-grid">
-      <div class="about-image reveal reveal-left">
-        <img src="../resources/projects/moisturesensor.JPEG" alt="In Wall Moisture Sensors and Hubs" />
+      <div class="proj-meta-row">
+        <div class="proj-chip">
+          <span class="proj-chip-label">Role</span>
+          Hardware design, firmware, enclosure
+        </div>
+        <div class="proj-chip">
+          <span class="proj-chip-label">Tools</span>
+          KiCad · ESP32 · LoRa · custom PCB
+        </div>
+        <div class="proj-chip">
+          <span class="proj-chip-label">Focus</span>
+          Reliability · power · manufacturability
+        </div>
       </div>
+    </section>
 
-      <div class="about-text reveal reveal-right">
-        <p class="intro-text">
-          This system uses low-power, low-frequency wireless nodes to quietly monitor moisture
-          inside walls over long periods. The goal: catch leaks early, before they turn into
-          mold, rot, and expensive tear-outs.
+    <!-- MAIN IMAGE -->
+    <section class="proj-main-image">
+      <img src="../resources/projects/moisturesense.JPG" alt="Moisture sensor node">
+    </section>
+
+    <!-- CONTENT + SIDE RAIL -->
+    <section class="proj-layout">
+      <article class="proj-content">
+        <h2>Overview</h2>
+        <p>
+          The moisture sensor node is part of a larger system aimed at catching leaks early. The board pairs a capacitance-based
+          moisture sensor with an ESP32 and LoRa radio, so deployed units can quietly report environmental data over long ranges
+          without Wi-Fi.
         </p>
 
-        <div class="expertise">
-          <h3>Electronics & RF</h3>
-          <ul class="about-list">
-            <li>Custom PCBs with low-level microcontrollers, sensor front-ends, and RF sections.</li>
-            <li>Sub-GHz communication for better penetration through walls and longer range.</li>
-            <li>Careful antenna layout and tuning to balance performance with small enclosure size.</li>
+        <h2>Design details</h2>
+        <ul>
+          <li>Custom PCB with moisture sensing front-end and radio</li>
+          <li>Firmware focused on deep-sleep and low average current draw</li>
+          <li>Mechanical design for easy mounting in real buildings</li>
+        </ul>
+
+        <h2>Why it matters</h2>
+        <p>
+          Water damage is expensive and usually discovered late. By making these nodes cheap, small, and simple to install,
+          you can turn passive buildings into systems that surface problems before they become disasters.
+        </p>
+      </article>
+
+      <aside class="proj-side">
+        <div class="proj-side-section">
+          <div class="proj-side-label">Stack</div>
+          <ul class="proj-side-list">
+            <li>Custom PCB design</li>
+            <li>ESP32 + LoRa</li>
+            <li>Capacitive moisture sensing</li>
+            <li>Battery-powered enclosure</li>
           </ul>
         </div>
 
-        <div class="expertise">
-          <h3>Mechanical & Enclosure Design</h3>
-          <ul class="about-list">
-            <li>ASA housings designed to survive humid, hot, and dusty environments.</li>
-            <li>Mounting geometry to sit behind drywall while staying serviceable if needed.</li>
-            <li>Thought about install workflow for contractors: drill, insert, pair, and walk away.</li>
+        <div class="proj-side-section">
+          <div class="proj-side-label">Highlights</div>
+          <ul class="proj-side-list">
+            <li>Optimized for long-term deployment</li>
+            <li>Designed with manufacturability in mind</li>
+            <li>Integrates into larger monitoring systems</li>
           </ul>
         </div>
 
-        <div class="skills">
-          <div class="skill">PCB Design</div>
-          <div class="skill">Low-Frequency RF</div>
-          <div class="skill">Embedded Firmware</div>
-          <div class="skill">ASA Printing</div>
-          <div class="skill">IoT Systems</div>
+        <div class="proj-side-section">
+          <div class="proj-side-label">Next iterations</div>
+          <ul class="proj-side-list">
+            <li>Field testing in multiple building types</li>
+            <li>Refined enclosure for faster installation</li>
+            <li>Over-the-air firmware update flow</li>
+          </ul>
         </div>
+      </aside>
+    </section>
 
-        <a href="../index.html#contact" class="project-link">
-          <i class="fas fa-water"></i> Chat About Sensing & IoT
-        </a>
+    <!-- GALLERY -->
+    <section class="proj-gallery">
+      <div class="proj-gallery-main">
+        <img src="../resources/projects/moisturesense.JPG" alt="Sensor node PCB">
+        <div class="proj-gallery-label">PCB layout</div>
       </div>
-    </div>
-  </section>
+      <div class="proj-gallery-stack">
+        <div class="proj-gallery-stack-item">
+          <img src="../resources/projects/moisturesense.JPG" alt="Enclosure prototype">
+          <div class="proj-gallery-label">Enclosure</div>
+        </div>
+        <div class="proj-gallery-stack-item">
+          <img src="../resources/projects/moisturesense.JPG" alt="System testing">
+          <div class="proj-gallery-label">System tests</div>
+        </div>
+      </div>
+    </section>
 
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="footer-logo">Sam Forsberg</span>
-        <p>Pushing the boundaries of additive manufacturing</p>
-      </div>
-      <div class="footer-contact">
-        <div class="social-box">
-          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="https://github.com/samforsberg" target="_blank" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-        <div class="email-box">
-          <a href="mailto:sam@forsberg3d.com" class="contact-link">
-            <i class="fas fa-envelope"></i> samforsberg@outlook.com
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      &copy; 2025 Sam Forsberg
-    </div>
-  </footer>
+    <!-- PROJECT NAV -->
+    <section class="proj-nav">
+      <a href="printer.html" data-nav="prev">Previous project</a>
+      <span class="proj-nav-hint">Use ← and → to switch projects</span>
+      <a href="gokart.html" data-nav="next">Next project</a>
+    </section>
+  </main>
 
   <script src="../main.js"></script>
 </body>

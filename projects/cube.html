@@ -1,107 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Custom Light Display | Sam Forsberg</title>
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luminous Cube Sculpture | Sam Forsberg</title>
+  <link rel="stylesheet" href="../project-style.css" />
 </head>
 <body>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="page-transition"></div>
 
-  <div class="loader">
-    <div class="loader-spinner"></div>
-  </div>
+  <header class="proj-header">
+    <a href="../index.html" class="back-link">Back to portfolio</a>
+  </header>
 
-  <nav class="navbar">
-    <div class="nav-content">
-      <a href="../index.html#home" class="logo">
-        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="logo-text">Sam Forsberg</span>
-      </a>
-      <a href="../index.html#projects" class="project-link" style="margin-left:auto;">
-        ← Back to Projects
-      </a>
-    </div>
-  </nav>
+  <main class="proj-main">
+    <!-- HERO -->
+    <section class="proj-hero">
+      <div class="proj-eyebrow">Project · Interactive light object</div>
+      <h1>3D Printed Luminous Cube</h1>
+      <p class="proj-tagline">
+        A printed light cube that mixes hard edges with soft light. Designed as a desk-sized sculpture to explore light
+        diffusion, panel thickness, and how 3D-printed geometry can control glow instead of just surviving it.
+      </p>
 
-  <section class="projects">
-    <h1 class="section-title reveal reveal-up">Custom Light Display</h1>
-
-    <div class="about-grid">
-      <div class="about-image reveal reveal-left">
-        <img src="../resources/projects/CUBE.JPG" alt="Custom LED Light Cube" />
+      <div class="proj-meta-row">
+        <div class="proj-chip">
+          <span class="proj-chip-label">Role</span>
+          Concept, CAD, print, assembly
+        </div>
+        <div class="proj-chip">
+          <span class="proj-chip-label">Tools</span>
+          Fusion 360 · Voron 2.4 · custom LED driver
+        </div>
+        <div class="proj-chip">
+          <span class="proj-chip-label">Focus</span>
+          Light diffusion · panel geometry
+        </div>
       </div>
+    </section>
 
-      <div class="about-text reveal reveal-right">
-        <p class="intro-text">
-          This cube is a fully custom light sculpture built around ~1000 individually-addressable LEDs,
-          double-sided mirrors, and a 3D printed structure that hides wiring while still letting the light breathe.
+    <!-- MAIN IMAGE -->
+    <section class="proj-main-image">
+      <img src="../resources/projects/CUBE.JPG" alt="Luminous cube sculpture">
+    </section>
+
+    <!-- CONTENT + SIDE RAIL -->
+    <section class="proj-layout">
+      <article class="proj-content">
+        <h2>Overview</h2>
+        <p>
+          The cube is a small lighting object built around the idea that you can “tune” glow with geometry and print
+          settings. Each face uses slightly different wall thickness, infill, and patterning, so light leaks feel deliberate
+          instead of random.
         </p>
 
-        <div class="expertise">
-          <h3>Design & Hardware</h3>
-          <ul class="about-list">
-            <li>SolidWorks for parametric frame design, snap-fit panels, and mirror recesses.</li>
-            <li>3D printed PLA structure tuned for even light diffusion and clean cable routing.</li>
-            <li>Dense LED matrix layout with respect to thermals, accessibility, and serviceability.</li>
+        <h2>Design approach</h2>
+        <ul>
+          <li>Printed shell with selective thickening where I wanted sharper edges</li>
+          <li>Internal LED core mounted so it doesn’t hotspot a single panel</li>
+          <li>Tested multiple infill patterns to see how they scattered light</li>
+        </ul>
+
+        <h2>What I learned</h2>
+        <p>
+          This project was a great playground for understanding how printers handle thin walls and how much detail you can
+          get away with on a small form factor. It also highlighted how “tiny” tweaks in infill and wall count can totally
+          change how light wraps around a volume.
+        </p>
+      </article>
+
+      <aside class="proj-side">
+        <div class="proj-side-section">
+          <div class="proj-side-label">Stack</div>
+          <ul class="proj-side-list">
+            <li>Fusion 360</li>
+            <li>Voron 2.4</li>
+            <li>Custom LED driver + microcontroller</li>
+            <li>White PLA + translucent accents</li>
           </ul>
         </div>
 
-        <div class="expertise">
-          <h3>Software & Animations</h3>
-          <ul class="about-list">
-            <li>Custom animation engine to generate 3D patterns, waves, and audio-reactive effects.</li>
-            <li>Configurable scenes: ambient modes, “showcase” patterns, and low-brightness night presets.</li>
-            <li>Optimized update loop to keep transitions smooth while staying within power budget.</li>
+        <div class="proj-side-section">
+          <div class="proj-side-label">Highlights</div>
+          <ul class="proj-side-list">
+            <li>Clean seams and invisible mounting points</li>
+            <li>Diffused light without visible LED pinpoints</li>
+            <li>Modular internals for future effects</li>
           </ul>
         </div>
 
-        <div class="skills">
-          <div class="skill">SolidWorks</div>
-          <div class="skill">LED Mapping</div>
-          <div class="skill">Custom Firmware</div>
-          <div class="skill">Arachne Slicing</div>
-          <div class="skill">3D Printed Enclosures</div>
+        <div class="proj-side-section">
+          <div class="proj-side-label">Next iterations</div>
+          <ul class="proj-side-list">
+            <li>Addressable LEDs for more dynamic patterns</li>
+            <li>Swappable face plates with different textures</li>
+            <li>Magnetic lid for easier access</li>
+          </ul>
         </div>
+      </aside>
+    </section>
 
-        <a href="../index.html#contact" class="project-link">
-          <i class="fas fa-lightbulb"></i> Discuss Light Installations
-        </a>
+    <!-- GALLERY -->
+    <section class="proj-gallery">
+      <div class="proj-gallery-main">
+        <img src="../resources/projects/CUBE.JPG" alt="Cube detail">
+        <div class="proj-gallery-label">Panel detail</div>
       </div>
-    </div>
-  </section>
+      <div class="proj-gallery-stack">
+        <div class="proj-gallery-stack-item">
+          <img src="../resources/projects/CUBE.JPG" alt="Glow test">
+          <div class="proj-gallery-label">Glow test</div>
+        </div>
+        <div class="proj-gallery-stack-item">
+          <img src="../resources/projects/CUBE.JPG" alt="Assembly">
+          <div class="proj-gallery-label">Assembly</div>
+        </div>
+      </div>
+    </section>
 
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="footer-logo">Sam Forsberg</span>
-        <p>Pushing the boundaries of additive manufacturing</p>
-      </div>
-      <div class="footer-contact">
-        <div class="social-box">
-          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="https://github.com/samforsberg" target="_blank" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-        <div class="email-box">
-          <a href="mailto:sam@forsberg3d.com" class="contact-link">
-            <i class="fas fa-envelope"></i> samforsberg@outlook.com
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      &copy; 2025 Sam Forsberg
-    </div>
-  </footer>
+    <!-- PROJECT NAV -->
+    <section class="proj-nav">
+      <a href="plane.html" data-nav="prev">Previous project</a>
+      <span class="proj-nav-hint">Use ← and → to switch projects</span>
+      <a href="printer.html" data-nav="next">Next project</a>
+    </section>
+  </main>
 
   <script src="../main.js"></script>
 </body>

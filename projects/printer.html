@@ -1,108 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>High-Performance 3D Printer | Sam Forsberg</title>
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom 3D Printer Platform | Sam Forsberg</title>
+  <link rel="stylesheet" href="../project-style.css" />
 </head>
 <body>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="page-transition"></div>
 
-  <div class="loader">
-    <div class="loader-spinner"></div>
-  </div>
+  <header class="proj-header">
+    <a href="../index.html" class="back-link">Back to portfolio</a>
+  </header>
 
-  <nav class="navbar">
-    <div class="nav-content">
-      <a href="../index.html#home" class="logo">
-        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="logo-text">Sam Forsberg</span>
-      </a>
-      <a href="../index.html#projects" class="project-link" style="margin-left:auto;">
-        ← Back to Projects
-      </a>
-    </div>
-  </nav>
+  <main class="proj-main">
+    <!-- HERO -->
+    <section class="proj-hero">
+      <div class="proj-eyebrow">Project · Hardware platform</div>
+      <h1>High-Performance 3D Printer Build</h1>
+      <p class="proj-tagline">
+        A custom-tuned printer built for high-speed, high-accuracy parts. This machine is my testbed for materials,
+        motion systems, and firmware experiments that feed directly into real-world mechanical work.
+      </p>
 
-  <section class="projects">
-    <h1 class="section-title reveal reveal-up">High-Performance 3D Printer</h1>
-
-    <div class="about-grid">
-      <div class="about-image reveal reveal-left">
-        <img src="../resources/projects/PRINTER.JPG" alt="High performance Voron-style 3D printer" />
+      <div class="proj-meta-row">
+        <div class="proj-chip">
+          <span class="proj-chip-label">Role</span>
+          Mechanical, electrical, and firmware
+        </div>
+        <div class="proj-chip">
+          <span class="proj-chip-label">Tools</span>
+          Voron-style coreXY · Klipper · custom wiring
+        </div>
+        <div class="proj-chip">
+          <span class="proj-chip-label">Focus</span>
+          Reliability · throughput · consistency
+        </div>
       </div>
+    </section>
 
-      <div class="about-text reveal reveal-right">
-        <p class="intro-text">
-          This printer was built from scratch using mostly 3D printed parts and open-source hardware.
-          It’s tuned for high-speed, high-temperature printing and is the workhorse behind the plane,
-          cube, and a lot of client parts.
+    <!-- MAIN IMAGE -->
+    <section class="proj-main-image">
+      <img src="../resources/projects/printer.JPG" alt="Custom 3D printer build">
+    </section>
+
+    <!-- CONTENT + SIDE RAIL -->
+    <section class="proj-layout">
+      <article class="proj-content">
+        <h2>Overview</h2>
+        <p>
+          Off-the-shelf printers are fine for hobby work, but I wanted a platform that behaves like a tool: predictable,
+          repeatable, and easy to service. This build is tuned for fast iteration, with an emphasis on clean routing,
+          stable motion, and firmware that exposes real control.
         </p>
 
-        <div class="expertise">
-          <h3>Hardware & Capabilities</h3>
-          <ul class="about-list">
-            <li>CoreXY layout with rigid frame and direct-drive toolhead for clean motion at high accelerations.</li>
-            <li>All-metal hotend capable of 500&nbsp;&deg;C and enclosed build volume for engineering plastics.</li>
-            <li>Custom wiring and cable management to keep the motion system light and serviceable.</li>
+        <h2>What I focused on</h2>
+        <ul>
+          <li>Rigid frame and motion system for high accelerations</li>
+          <li>Clean cable management and labeled harnesses</li>
+          <li>Klipper firmware with dialed input shaping and pressure advance</li>
+          <li>Easy maintenance: panels, belts, and hotend are all accessible</li>
+        </ul>
+
+        <h2>Outcome</h2>
+        <p>
+          This printer is now my daily driver for functional parts. It’s fast enough for prototypes on a deadline and
+          precise enough for tight mechanical fits, which means more time solving actual problems and less time fighting hardware.
+        </p>
+      </article>
+
+      <aside class="proj-side">
+        <div class="proj-side-section">
+          <div class="proj-side-label">Stack</div>
+          <ul class="proj-side-list">
+            <li>CoreXY frame and motion</li>
+            <li>Klipper firmware</li>
+            <li>Custom wiring harnesses</li>
+            <li>Input shaping and advanced tuning</li>
           </ul>
         </div>
 
-        <div class="expertise">
-          <h3>Firmware & Calibration</h3>
-          <ul class="about-list">
-            <li>Klipper-based firmware with pressure advance, input shaping, and tuned acceleration profiles.</li>
-            <li>Custom macros for material swaps, nozzle cleaning, and repeatable calibration routines.</li>
-            <li>Dialed in profiles for PLA, PETG, ASA, Nylon, and flexible materials.</li>
+        <div class="proj-side-section">
+          <div class="proj-side-label">Highlights</div>
+          <ul class="proj-side-list">
+            <li>Fast, clean prints at high acceleration</li>
+            <li>High uptime thanks to maintainable design</li>
+            <li>Serves as a platform for future toolheads</li>
           </ul>
         </div>
 
-        <div class="skills">
-          <div class="skill">CoreXY Kinematics</div>
-          <div class="skill">Klipper Firmware</div>
-          <div class="skill">High-Temp Printing</div>
-          <div class="skill">Printer Assembly</div>
-          <div class="skill">Process Tuning</div>
+        <div class="proj-side-section">
+          <div class="proj-side-label">Next iterations</div>
+          <ul class="proj-side-list">
+            <li>Multi-material toolhead experiments</li>
+            <li>Enclosure airflow and thermal tuning</li>
+            <li>Inline filament sensing and logging</li>
+          </ul>
         </div>
+      </aside>
+    </section>
 
-        <a href="../index.html#contact" class="project-link">
-          <i class="fas fa-cogs"></i> Build / Upgrade a Printer
-        </a>
+    <!-- GALLERY -->
+    <section class="proj-gallery">
+      <div class="proj-gallery-main">
+        <img src="../resources/projects/printer.JPG" alt="Printer closeup">
+        <div class="proj-gallery-label">Motion system</div>
       </div>
-    </div>
-  </section>
+      <div class="proj-gallery-stack">
+        <div class="proj-gallery-stack-item">
+          <img src="../resources/projects/printer.JPG" alt="Electronics bay">
+          <div class="proj-gallery-label">Electronics</div>
+        </div>
+        <div class="proj-gallery-stack-item">
+          <img src="../resources/projects/printer.JPG" alt="Print result">
+          <div class="proj-gallery-label">Print quality</div>
+        </div>
+      </div>
+    </section>
 
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="footer-logo">Sam Forsberg</span>
-        <p>Pushing the boundaries of additive manufacturing</p>
-      </div>
-      <div class="footer-contact">
-        <div class="social-box">
-          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="https://github.com/samforsberg" target="_blank" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-        <div class="email-box">
-          <a href="mailto:sam@forsberg3d.com" class="contact-link">
-            <i class="fas fa-envelope"></i> samforsberg@outlook.com
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      &copy; 2025 Sam Forsberg
-    </div>
-  </footer>
+    <!-- PROJECT NAV -->
+    <section class="proj-nav">
+      <a href="cube.html" data-nav="prev">Previous project</a>
+      <span class="proj-nav-hint">Use ← and → to switch projects</span>
+      <a href="moisture-sensor.html" data-nav="next">Next project</a>
+    </section>
+  </main>
 
   <script src="../main.js"></script>
 </body>

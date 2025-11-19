@@ -1,0 +1,404 @@
+/* ============================================================
+   Global Project Page Styling
+============================================================ */
+:root {
+  --accent-orange: #ff8a3c;
+  --accent-pink:   #ff4fb6;
+  --text-muted:    #cdc2d6;
+  --bg-deep:       #050309;
+  --bg-elevated:   #14101d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top left, #110815 0, #050309 46%, #020104 100%);
+  color: #f6eefc;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.7;
+}
+
+/* Page transition overlay */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  pointer-events: none;
+  opacity: 0;
+  transform: scaleY(0.96);
+  transform-origin: top;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255,138,60,0.35), transparent 60%),
+    radial-gradient(circle at 85% 100%, rgba(255,79,182,0.32), transparent 65%),
+    #050309;
+  display: none;
+}
+
+.page-transition--active,
+.page-transition--intro {
+  display: block;
+}
+
+.page-transition--active {
+  animation: pageTransitionOut .4s ease forwards;
+}
+
+.page-transition--intro {
+  animation: pageTransitionIn .45s ease forwards;
+}
+
+@keyframes pageTransitionOut {
+  0%   { opacity: 0; transform: scaleY(0.96); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes pageTransitionIn {
+  0%   { opacity: 1; transform: scaleY(1); }
+  100% { opacity: 0; transform: scaleY(0.99); }
+}
+
+/* ============================================================
+   Header
+============================================================ */
+.proj-header {
+  padding: 1.6rem 2.4rem 0;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.back-link {
+  color: #ffdac7;
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0.8;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.back-link::before {
+  content: "←";
+  font-size: 1rem;
+  transform: translateY(0.5px);
+}
+
+.back-link:hover {
+  opacity: 1;
+  transform: translateX(-3px);
+}
+
+/* ============================================================
+   Main layout
+============================================================ */
+.proj-main {
+  max-width: 1180px;
+  margin: 0 auto 4rem;
+  padding: 1.2rem 2.4rem 4rem;
+}
+
+/* Hero section */
+.proj-hero {
+  margin-top: 1.8rem;
+  padding: 1.8rem 1.5rem 1.6rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255,138,60,0.18), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(255,79,182,0.2), transparent 65%),
+    rgba(8,4,15,0.96);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 20px 45px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(0,0,0,0.9);
+}
+
+.proj-eyebrow {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(252,222,210,0.9);
+  margin-bottom: 0.5rem;
+}
+
+.proj-hero h1 {
+  font-size: clamp(2.2rem, 2.4vw + 1.4rem, 3rem);
+  margin: 0 0 0.6rem;
+  background: linear-gradient(95deg, var(--accent-orange), var(--accent-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.proj-tagline {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  max-width: 720px;
+}
+
+/* Hero meta chips */
+.proj-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.proj-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(11,7,16,0.9);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.8rem;
+  color: rgba(245,232,255,0.95);
+}
+
+.proj-chip-label {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  color: rgba(255,216,196,0.98);
+}
+
+/* ============================================================
+   Content + Side rail layout
+============================================================ */
+.proj-layout {
+  margin-top: 2.3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.1fr);
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Main text area */
+.proj-content h2 {
+  font-size: 1.4rem;
+  margin: 1.8rem 0 0.5rem;
+}
+
+.proj-content h2:first-of-type {
+  margin-top: 0.6rem;
+}
+
+.proj-content p {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+}
+
+.proj-content ul {
+  margin: 0.4rem 0 1.5rem;
+  padding-left: 1.3rem;
+}
+
+.proj-content li {
+  margin-bottom: 0.55rem;
+  color: #e9dfee;
+}
+
+/* Side rail box */
+.proj-side {
+  border-radius: 20px;
+  padding: 1.3rem 1.2rem 1.4rem;
+  background: linear-gradient(145deg, #161120, #0b0713);
+  border: 1px solid rgba(255,255,255,0.09);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(0,0,0,0.9);
+}
+
+.proj-side h3 {
+  font-size: 1.05rem;
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+}
+
+.proj-side-section + .proj-side-section {
+  margin-top: 1.1rem;
+}
+
+.proj-side-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255,216,196,0.95);
+}
+
+.proj-side-list {
+  margin-top: 0.5rem;
+  list-style: none;
+  padding-left: 0;
+  font-size: 0.9rem;
+  color: #e5d8f0;
+}
+
+.proj-side-list li + li {
+  margin-top: 0.3rem;
+}
+
+/* ============================================================
+   Image blocks & gallery
+============================================================ */
+.proj-main-image {
+  margin-top: 2.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.proj-main-image img {
+  display: block;
+  width: min(760px, 90%);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,0.85),
+    0 0 0 1px rgba(0,0,0,0.95);
+}
+
+/* Artsy gallery: 3 slots */
+.proj-gallery {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.1rem;
+}
+
+.proj-gallery-main,
+.proj-gallery-stack {
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: radial-gradient(circle at top left, #231629 0, #0c0713 55%, #050308 100%);
+  box-shadow:
+    0 15px 32px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(0,0,0,0.95);
+}
+
+.proj-gallery-main img,
+.proj-gallery-stack img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* stack column */
+.proj-gallery-stack {
+  display: grid;
+  grid-template-rows: 170px 170px;
+}
+
+.proj-gallery-stack-item {
+  position: relative;
+}
+
+.proj-gallery-label {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(8,3,12,0.94);
+  border: 1px solid rgba(255,214,190,0.8);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.17em;
+  color: rgba(255,236,229,0.98);
+}
+
+/* ============================================================
+   Responsive
+============================================================ */
+@media (max-width: 960px) {
+  .proj-main {
+    padding-inline: 1.5rem;
+  }
+
+  .proj-layout {
+    grid-template-columns: minmax(0,1fr);
+  }
+
+  .proj-side {
+    order: -1;
+  }
+
+  .proj-gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .proj-gallery-stack {
+    grid-template-rows: 160px 160px;
+  }
+}
+
+@media (max-width: 640px) {
+  .proj-header {
+    padding-inline: 1.3rem;
+  }
+
+  .proj-main {
+    padding-inline: 1.3rem;
+  }
+
+  .proj-hero {
+    padding-inline: 1.1rem;
+  }
+}
+
+/* ============================================================
+   Project navigation (prev / next)
+============================================================ */
+.proj-nav {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.proj-nav a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #ffdac7;
+  opacity: 0.85;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.proj-nav a[data-nav="prev"]::before {
+  content: "←";
+  font-size: 1rem;
+}
+
+.proj-nav a[data-nav="next"]::after {
+  content: "→";
+  font-size: 1rem;
+}
+
+.proj-nav a:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.proj-nav-hint {
+  flex: 1;
+  text-align: center;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(205,194,214,0.7);
+}

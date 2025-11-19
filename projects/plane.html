@@ -1,113 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>High-Velocity 3D Printed Plane | Sam Forsberg</title>
-
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../project-style.css" />
 </head>
 <body>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="page-transition"></div>
 
-  <!-- Loader -->
-  <div class="loader">
-    <div class="loader-spinner"></div>
-  </div>
+  <header class="proj-header">
+    <a href="../index.html" class="back-link">Back to portfolio</a>
+  </header>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-content">
-      <a href="../index.html#home" class="logo">
-        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="logo-text">Sam Forsberg</span>
-      </a>
-      <a href="../index.html#projects" class="project-link" style="margin-left:auto;">
-        ← Back to Projects
-      </a>
-    </div>
-  </nav>
+  <main class="proj-main">
+    <!-- HERO -->
+    <section class="proj-hero">
+      <div class="proj-eyebrow">Project · Aerospace-inspired 3D print</div>
+      <h1>High-Velocity 3D Printed Plane</h1>
+      <p class="proj-tagline">
+        A lightweight airframe tuned for high-g maneuvering, optimized infill, and reinforced stress points.
+        Built to see how far a desktop 3D printer can go when you treat it like a wind-tunnel tool instead of a toy.
+      </p>
 
-  <!-- Plane Project -->
-  <section class="projects">
-    <h1 class="section-title reveal reveal-up">High-Velocity 3D Printed Plane</h1>
-
-    <div class="about-grid">
-      <div class="about-image reveal reveal-left">
-        <img src="../resources/projects/PLANE.JPG" alt="High-Velocity 3D Printed Plane" />
+      <div class="proj-meta-row">
+        <div class="proj-chip">
+          <span class="proj-chip-label">Role</span>
+          Design, printing, tuning, flight testing
+        </div>
+        <div class="proj-chip">
+          <span class="proj-chip-label">Tools</span>
+          Fusion 360 · Voron 2.4 · Klipper
+        </div>
+        <div class="proj-chip">
+          <span class="proj-chip-label">Focus</span>
+          Lightweight structure · stiffness · print speed
+        </div>
       </div>
+    </section>
 
-      <div class="about-text reveal reveal-right">
-        <p class="intro-text">
-          This plane started as a stress test for high-speed printing and turned into a platform
-          for playing with aerodynamics, structural optimization, and slicer tuning. It’s designed
-          to survive launches, hard landings, and sustained loads up to ~15&nbsp;g.
+    <!-- MAIN IMAGE -->
+    <section class="proj-main-image">
+      <img src="../resources/projects/PLANE.JPG" alt="High-velocity 3D printed plane">
+    </section>
+
+    <!-- CONTENT + SIDE RAIL -->
+    <section class="proj-layout">
+      <article class="proj-content">
+        <h2>Overview</h2>
+        <p>
+          This plane started as a “can I print something that actually flies?” and turned into a full structural tuning
+          project. I focused on keeping weight low while reinforcing the nose, wing roots, and tail so it could survive
+          real landings and aggressive turns.
         </p>
 
-        <div class="expertise">
-          <h3>Build Overview</h3>
-          <ul class="about-list">
-            <li>Modeled in Fusion 360 with separate control surfaces, spars, and modular nose sections.</li>
-            <li>Printed in foaming PLA for low-mass skins and TPU for impact-resistant nose and wingtips.</li>
-            <li>Carbon fiber spars embedded during printing to stiffen the wings and fuselage spine.</li>
+        <p>
+          Instead of brute-force thickness, the design uses targeted walls and infill density. Low-stress regions are hollowed
+          out, while high-stress regions get material and geometry where it actually matters.
+        </p>
+
+        <h2>What I built</h2>
+        <ul>
+          <li>Parametric fuselage and wing in Fusion 360</li>
+          <li>Reinforced spar and wing root geometry</li>
+          <li>Print profiles tuned for speed and adhesion</li>
+          <li>Modular nose section for repairs and experiments</li>
+        </ul>
+
+        <h2>Why it matters</h2>
+        <p>
+          The same thinking that kept this airframe light but durable applies directly to brackets, fixtures, and
+          prototypes that have to handle load. It’s less about “cool plane” and more about building mechanical intuition
+          around where a print will fail.
+        </p>
+      </article>
+
+      <aside class="proj-side">
+        <div class="proj-side-section">
+          <div class="proj-side-label">Stack</div>
+          <ul class="proj-side-list">
+            <li>Fusion 360 (parametric CAD)</li>
+            <li>Voron 2.4 (coreXY printer)</li>
+            <li>Klipper + input shaping</li>
+            <li>PLA / lightweight PLA blend</li>
           </ul>
         </div>
 
-        <div class="expertise">
-          <h3>What I Focused On</h3>
-          <ul class="about-list">
-            <li>Reducing print time by ~40% using custom profiles, gyroid infill, and aggressive accelerations.</li>
-            <li>Balancing stiffness vs. weight by iterating wall thickness, rib spacing, and spar placement.</li>
-            <li>Designing around real hardware: battery bay, servo pockets, wire channels, and CG tuning options.</li>
+        <div class="proj-side-section">
+          <div class="proj-side-label">Highlights</div>
+          <ul class="proj-side-list">
+            <li>Large weight savings vs. naive solid prints</li>
+            <li>Survived repeated flights and rough landings</li>
+            <li>Balanced CG without adding dead ballast</li>
           </ul>
         </div>
 
-        <div class="skills">
-          <div class="skill">Fusion 360</div>
-          <div class="skill">Foaming PLA</div>
-          <div class="skill">TPU</div>
-          <div class="skill">Voron 2.4</div>
-          <div class="skill">Flight Hardware Integration</div>
+        <div class="proj-side-section">
+          <div class="proj-side-label">Next iterations</div>
+          <ul class="proj-side-list">
+            <li>Switch to CF-Nylon for stiffness</li>
+            <li>Embed wiring channels into the shell</li>
+            <li>Test alternate airfoils and winglets</li>
+          </ul>
         </div>
+      </aside>
+    </section>
 
-        <a href="../index.html#contact" class="project-link">
-          <i class="fas fa-paper-plane"></i> Talk About Custom Airframes
-        </a>
+    <!-- GALLERY -->
+    <section class="proj-gallery">
+      <div class="proj-gallery-main">
+        <img src="../resources/projects/PLANE.JPG" alt="Plane wing and structure">
+        <div class="proj-gallery-label">Wing & structure</div>
       </div>
-    </div>
-  </section>
+      <div class="proj-gallery-stack">
+        <div class="proj-gallery-stack-item">
+          <img src="../resources/projects/PLANE.JPG" alt="Surface finish">
+          <div class="proj-gallery-label">Print finish</div>
+        </div>
+        <div class="proj-gallery-stack-item">
+          <img src="../resources/projects/PLANE.JPG" alt="Bench testing">
+          <div class="proj-gallery-label">Bench testing</div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <img src="../resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="footer-logo">Sam Forsberg</span>
-        <p>Pushing the boundaries of additive manufacturing</p>
-      </div>
-      <div class="footer-contact">
-        <div class="social-box">
-          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="https://github.com/samforsberg" target="_blank" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-        <div class="email-box">
-          <a href="mailto:sam@forsberg3d.com" class="contact-link">
-            <i class="fas fa-envelope"></i> samforsberg@outlook.com
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      &copy; 2025 Sam Forsberg
-    </div>
-  </footer>
+    <!-- PROJECT NAV -->
+    <section class="proj-nav">
+      <a href="gokart.html" data-nav="prev">Previous project</a>
+      <span class="proj-nav-hint">Use ← and → to switch projects</span>
+      <a href="cube.html" data-nav="next">Next project</a>
+    </section>
+  </main>
 
   <script src="../main.js"></script>
 </body>

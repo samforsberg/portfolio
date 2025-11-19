@@ -6,114 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sam Forsberg | 3D Printing Engineer</title>
 
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
-  <!-- Enhancements needed by JS (keep minimal to avoid conflicts with style.css) -->
-  <style>
-    /* ===== Scroll Reveal System (pairs with main.js) ===== */
-    :root {
-      --reveal-distance: 28px;
-      --reveal-duration: 600ms;
-      --reveal-ease: cubic-bezier(.21,.61,.35,1);
-    }
-    .reveal{
-      opacity:0;
-      transform:translateY(var(--reveal-distance));
-      filter:blur(6px);
-      transition:
-        opacity var(--reveal-duration) var(--reveal-ease),
-        transform var(--reveal-duration) var(--reveal-ease),
-        filter var(--reveal-duration) var(--reveal-ease);
-      will-change:opacity,transform,filter;
-      transition-delay: var(--d, 0ms);
-    }
-    .reveal-up{ transform: translateY(var(--reveal-distance)); }
-    .reveal-down{ transform: translateY(calc(var(--reveal-distance) * -1)); }
-    .reveal-left{ transform: translateX(var(--reveal-distance)); }
-    .reveal-right{ transform: translateX(calc(var(--reveal-distance) * -1)); }
-    .reveal-scale{ transform: scale(.96); }
-    .reveal.in-view{ opacity:1; transform:none; filter:none; }
-
-    /* Parallax wrapper hook */
-    .parallax-wrap{ perspective: 800px; contain: paint; }
-    .parallax{ will-change: transform; transform: translateZ(0); }
-
-    /* Navbar link effects (if not already in style.css) */
-    .nav-links a{
-      position:relative;
-      color:#fff;
-      text-decoration:none;
-      font-weight:500;
-      padding:0.5rem 0;
-      font-size:1rem;
-      background: linear-gradient(90deg,#00ff88,#00ccff);
-      background-size:200%;
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      transition: background-position .4s ease, text-shadow .4s ease;
-    }
-    .nav-links a:hover{
-      background-position:100%;
-      text-shadow:0 0 8px rgba(0,255,136,.6),0 0 12px rgba(0,204,255,.4);
-    }
-    .nav-links a::after{
-      content:'';
-      position:absolute;
-      left:0; bottom:-3px;
-      width:0%; height:2px;
-      background: linear-gradient(90deg,#00ff88,#00ccff);
-      box-shadow:0 0 8px rgba(0,255,136,.7);
-      transition: width .3s ease;
-    }
-    .nav-links a:hover::after{ width:100%; }
-    .nav-links a.active{ text-shadow:0 0 10px rgba(0,255,136,.8); }
-
-    /* Cool name effect (if not already in style.css) */
-    .logo-text{
-      font-weight:700;
-      font-size:1.5rem;
-      letter-spacing:1px;
-      background: linear-gradient(90deg,#00ff88,#00ccff,#00ff88);
-      background-size:200%;
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      animation: nameGlow 4s ease-in-out infinite alternate;
-      text-shadow: 0 0 8px rgba(0,255,136,.3), 0 0 12px rgba(0,204,255,.2);
-      transition: transform .3s ease, text-shadow .3s ease;
-    }
-    .logo-text:hover{
-      transform: scale(1.05);
-      text-shadow: 0 0 15px rgba(0,255,136,.8), 0 0 25px rgba(0,204,255,.6);
-      animation: shine 2s linear infinite;
-    }
-    @keyframes nameGlow{
-      0%{ background-position:0% 50%; }
-      100%{ background-position:100% 50%; }
-    }
-    @keyframes shine{
-      0%{ background-position:0% 50%; }
-      100%{ background-position:200% 50%; }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .reveal, .reveal.in-view, .parallax, .logo-text{
-        transition:none !important; animation:none !important; transform:none !important; filter:none !important;
-      }
-    }
-  </style>
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Interactive Background -->
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="page-transition"></div>
+
   <!-- Loader -->
   <div class="loader">
     <div class="loader-spinner"></div>
   </div>
 
-  <!-- Modern Glass Navbar -->
+  <!-- Scroll HUD Rail (no text, only bar) -->
+  <div class="scroll-rail" aria-hidden="true">
+    <div class="scroll-rail-track">
+      <div class="scroll-rail-ticks"></div>
+      <div class="scroll-rail-thumb"></div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-content">
       <a href="#home" class="logo">
@@ -131,111 +53,353 @@
 
   <!-- HERO -->
   <section id="home" class="hero parallax-wrap">
-    <div class="hero-content">
-      <div class="hero-badge parallax" data-depth="1">3D Printing Specialist Since 2016</div>
-      <h1 class="hero-title parallax" data-depth="2">Transforming Ideas<br/>Into Physical Reality</h1>
-      <p class="hero-subtitle parallax" data-depth="3">
-        Mechanical Engineer & Additive Manufacturing Expert<br/>Based in Boulder, Colorado
-      </p>
-    </div>
-    <div class="scroll-indicator"></div>
-  </section -->
+    <!-- Decorative hero glows -->
+    <div class="hero-orbit parallax" data-depth="0.6"></div>
+    <div class="hero-glow parallax" data-depth="0.3"></div>
 
-  <!-- ✨ Divider -->
+    <div class="hero-content reveal reveal-up hero-shell">
+      <div class="hero-badge parallax" data-depth="1">
+        <span class="badge-dot"></span>
+        3D Printing Specialist · Since 2016
+      </div>
+
+      <p class="hero-eyebrow">Mechanical Engineer · Additive Manufacturing</p>
+
+      <h1 class="hero-title parallax" data-depth="2">
+        Transforming ideas<br />
+        into fast, reliable hardware.
+      </h1>
+
+      <p class="hero-subtitle parallax" data-depth="3">
+        I design, tune, and build high-speed 3D printers, embedded hardware, and
+        real-world prototypes—end to end, from CAD to debug logs.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn primary-btn">
+          View signature projects
+          <i class="fa-solid fa-arrow-trend-up"></i>
+        </a>
+        <a href="#contact" class="btn ghost-btn">
+          Get in touch
+          <i class="fa-solid fa-paper-plane"></i>
+        </a>
+      </div>
+
+      <!-- Tech stack strip -->
+      <div class="hero-stack reveal reveal-up" style="--d:140ms">
+        <span class="stack-label">Toolchain</span>
+        <div class="stack-items">
+          <span class="stack-pill">Voron 2.4</span>
+          <span class="stack-pill">Klipper</span>
+          <span class="stack-pill">Fusion 360</span>
+          <span class="stack-pill">SolidWorks</span>
+          <span class="stack-pill">ESP32 / LoRa</span>
+          <span class="stack-pill">Python</span>
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <div class="hero-chip">
+          <span class="chip-label">Focus</span>
+          High-speed FDM · IoT · PCB design
+        </div>
+        <div class="hero-chip">
+          <span class="chip-label">Tooling</span>
+          Voron 2.4 · Fusion 360 · SolidWorks
+        </div>
+        <div class="hero-chip">
+          <span class="chip-label">Location</span>
+          Boulder, Colorado
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator"></div>
+  </section>
+
+  <!-- Divider -->
   <div class="section-divider" aria-hidden="true"></div>
 
   <!-- PROJECTS -->
-  <section id="projects" class="projects">
+  <section id="projects" class="projects scroll-section">
+    <div class="section-bg-accent"></div>
+
+    <div class="section-meta reveal reveal-left">
+      <span class="section-meta-label">01</span>
+      <span class="section-meta-line"></span>
+      <span class="section-meta-text">Selected projects</span>
+    </div>
+
     <h2 class="section-title reveal reveal-up">Signature Creations</h2>
+    <p class="section-subtitle reveal reveal-up" style="--d:80ms">
+      A snapshot of the systems, prototypes, and experiments I’m most proud of.
+    </p>
+
+    <div class="portfolio-highlights reveal reveal-up" style="--d:120ms">
+      <div class="highlight-item">
+        <span class="highlight-label">Printers tuned</span>
+        <span class="highlight-value">10+</span>
+        <span class="highlight-note">Voron, Bambu, custom builds</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-label">Functional parts printed</span>
+        <span class="highlight-value">1,000+</span>
+        <span class="highlight-note">Fixtures, housings, brackets</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-label">Embedded devices</span>
+        <span class="highlight-value">6</span>
+        <span class="highlight-note">Prototypes to field tests</span>
+      </div>
+    </div>
 
     <div class="projects-grid">
-      <article class="project-card reveal reveal-up reveal-card">
-        <div class="project-image">
-          <img src="resources/projects/PLANE.JPG" alt="Aerodynamic Plane">
-          <div class="project-tech"> Foaming PLA & TPU | Fusion 360 | Voron 2.4</div>
-        </div>
-        <div class="project-info">
-          <h3>High-Velocity 3D printed Plane</h3>
-          <p>Designed and printed lightweight aerodynamic frame capable of withstanding 15G forces. Reduced print time by 40% through custom slicer profiles. Utilized engineering materials to maintain a lightweight glider, with carbon fiber reinforced spars to increase durability</p>
-          <a href="projects/plane.html" class="project-link">More Info</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal reveal-up reveal-card" style="--d:90ms">
-        <div class="project-image">
-          <img src="resources/projects/CUBE.JPG" alt="Light Cube">
-          <div class="project-tech">PLA | Custom Software | Arachne Slicing </div>
-        </div>
-        <div class="project-info">
-          <h3>Custom Light Display</h3>
-          <p>Used SolidWorks to design and build a light display featuring 1000 LEDs and double sided mirrors.</p>
-          <a href="projects/cube.html" class="project-link">See More</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal reveal-up reveal-card" style="--d:90ms">
-        <div class="project-image">
-          <img src="resources/projects/PRINTER.JPG" alt="Voron 2.4 3D printer">
-          <div class="project-tech">PLA | Custom Software | Arachne Slicing </div>
-        </div>
-        <div class="project-info">
-          <h3>3D printer</h3>
-          <p>Used other 3D printed parts to build a 3D printer from scratch that is capable of printing at 500 C&deg; and at high speeds. This printer was used to manufacture the Cube and the Plane.</p>
-          <a href="projects/printer.html" class="project-link">See More</a>
+      <!-- Plane -->
+      <article class="project-card" data-href="projects/plane.html">
+        <div class="project-inner">
+          <!-- FRONT -->
+          <div class="project-face project-face--front">
+            <div class="project-image">
+              <img src="resources/projects/PLANE.JPG" alt="Aerodynamic Plane">
+              <div class="project-image-gradient"></div>
+              <div class="project-front-title">
+                <span class="project-tag">Aerospace-inspired</span>
+                <h3>High-Velocity 3D Printed Plane</h3>
+              </div>
+            </div>
+          </div>
+          <!-- BACK -->
+          <div class="project-face project-face--back">
+            <div class="project-back-content">
+              <div>
+                <div class="project-tag">Aerospace-inspired</div>
+                <h3>High-Velocity 3D Printed Plane</h3>
+                <p>
+                  Lightweight airframe tuned for high-g turns with reinforced stress points and fast-print infill optimized for stiffness where it matters.
+                </p>
+                </p>
+              </div>
+              <div class="project-back-footer">
+                <span class="project-back-meta">FDM · Fusion 360 · Flight testing</span>
+                <span class="project-back-cta">View full breakdown ↗</span>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
-      <article class="project-card reveal reveal-up reveal-card" style="--d:90ms">
-        <div class="project-image">
-          <img src="resources/projects/moisturesensor.JPEG" alt="Moisture sensor and hubs">
-          <div class="project-tech">ASA | Custom Firmware | PCB Design </div>
-        </div>
-        <div class="project-info">
-          <h3>In Wall Moisture Sensors</h3>
-          <p>Learned to design PCBs with low level microcontrollers, use low frequency bands, and design antennaes</p>
-          <a href="projects/moisture-sensor.html" class="project-link">See More</a>
-        </div>
-      </article>
-      
-      <article class="project-card reveal reveal-up reveal-card" style="--d:90ms">
-        <div class="project-image">
-          <img src="resources/projects/gokart.jpg" alt="gokart">
-          <div class="project-tech">Metal | Engines | Welding </div>
-        </div>
-        <div class="project-info">
-          <h3>High speed gokart</h3>
-          <p>Bought a Gokart that wasnt functional, and rebuilt the engine and frame to make 12 horsepower and up to 80mph</p>
-          <a href="projects/gokart.html" class="project-link">See More</a>
+      <!-- Cube -->
+      <article class="project-card" data-href="projects/cube.html">
+        <div class="project-inner">
+          <div class="project-face project-face--front">
+            <div class="project-image">
+              <img src="resources/projects/CUBE.JPG" alt="Light Cube">
+              <div class="project-image-gradient"></div>
+              <div class="project-front-title">
+                <span class="project-tag">Generative lighting</span>
+                <h3>Custom Light Display</h3>
+              </div>
+            </div>
+          </div>
+          <div class="project-face project-face--back">
+            <div class="project-back-content">
+              <div>
+                <div class="project-tag">Generative lighting</div>
+                <h3>Custom Light Display</h3>
+                <p>
+                  Mirrored light cube with ~1000 addressable LEDs, driven by custom animations for smooth gradients and deep “infinite” reflections.
+                </p>
+              </div>
+              <div class="project-back-footer">
+                <span class="project-back-meta">WS2812 · Embedded · Optics</span>
+                <span class="project-back-cta">View project log ↗</span>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
+      <!-- Printer -->
+      <article class="project-card" data-href="projects/printer.html">
+        <div class="project-inner">
+          <div class="project-face project-face--front">
+            <div class="project-image">
+              <img src="resources/projects/PRINTER.JPG" alt="Voron 2.4 3D printer">
+              <div class="project-image-gradient"></div>
+              <div class="project-front-title">
+                <span class="project-tag">Manufacturing platform</span>
+                <h3>High-Speed 3D Printer Build</h3>
+              </div>
+            </div>
+          </div>
+          <div class="project-face project-face--back">
+            <div class="project-back-content">
+              <div>
+                <div class="project-tag">Manufacturing platform</div>
+                <h3>High-Speed 3D Printer Build</h3>
+                <p>
+                  CoreXY printer built for fast, repeatable production runs and high-temp materials—this is the workhorse behind most parts on this page.
+                </p>
+              </div>
+              <div class="project-back-footer">
+                <span class="project-back-meta">Voron 2.4 · Klipper · Toolhead mods</span>
+                <span class="project-back-cta">See build details ↗</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Moisture sensor -->
+      <article class="project-card" data-href="projects/moisture-sensor.html">
+        <div class="project-inner">
+          <div class="project-face project-face--front">
+            <div class="project-image">
+              <img src="resources/projects/moisturesensor.JPEG" alt="Moisture sensor and hubs">
+              <div class="project-image-gradient"></div>
+              <div class="project-front-title">
+                <span class="project-tag">Embedded & RF</span>
+                <h3>In-Wall Moisture Sensors</h3>
+              </div>
+            </div>
+          </div>
+          <div class="project-face project-face--back">
+            <div class="project-back-content">
+              <div>
+                <div class="project-tag">Embedded & RF</div>
+                <h3>In-Wall Moisture Sensors</h3>
+                <p>
+                  Compact in-wall leak detector with low-power radio, antenna-aware PCB layout, and an installer-friendly enclosure for real job sites.
+                </p>
+              </div>
+              <div class="project-back-footer">
+                <span class="project-back-meta">LoRa · Low-power firmware</span>
+                <span class="project-back-cta">View system design ↗</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Go-kart -->
+      <article class="project-card" data-href="projects/gokart.html">
+        <div class="project-inner">
+          <div class="project-face project-face--front">
+            <div class="project-image">
+              <img src="resources/projects/gokart.jpg" alt="Go-kart">
+              <div class="project-image-gradient"></div>
+              <div class="project-front-title">
+                <span class="project-tag">Mechanical systems</span>
+                <h3>High-Speed Go-Kart Rebuild</h3>
+              </div>
+            </div>
+          </div>
+          <div class="project-face project-face--back">
+            <div class="project-back-content">
+              <div>
+                <div class="project-tag">Mechanical systems</div>
+                <h3>High-Speed Go-Kart Rebuild</h3>
+                <p>
+                  Took a dead kart to ~80 mph by rebuilding the frame, drivetrain, and controls, focusing on reliability, safety, and handling at speed.
+                </p>
+              </div>
+              <div class="project-back-footer">
+                <span class="project-back-meta">Fabrication · Engine tuning</span>
+                <span class="project-back-cta">View rebuild story ↗</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- ✨ Divider -->
+  <!-- Divider -->
   <div class="section-divider" aria-hidden="true"></div>
 
   <!-- ABOUT -->
-  <section id="about" class="about">
+  <section id="about" class="about scroll-section">
+    <div class="section-bg-accent section-bg-accent--right"></div>
+
     <div class="about-content">
+      <div class="section-meta reveal reveal-left">
+        <span class="section-meta-label">02</span>
+        <span class="section-meta-line"></span>
+        <span class="section-meta-text">Background & approach</span>
+      </div>
+
       <h2 class="section-title reveal reveal-up">From CAD to Reality</h2>
+      <p class="section-subtitle reveal reveal-up" style="--d:80ms">
+        I like working where mechanical design, electronics, and software all overlap.
+      </p>
+
+      <div class="about-stats reveal reveal-up" style="--d:120ms">
+        <div class="about-stat">
+          <span class="about-stat-value">8+</span>
+          <span class="about-stat-label">Years with 3D printing</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-value">3</span>
+          <span class="about-stat-label">Active hardware projects</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-value">∞</span>
+          <span class="about-stat-label">Iterations tolerated</span>
+        </div>
+      </div>
+
       <div class="about-grid">
         <div class="about-image reveal reveal-left">
-          <img src="resources/sam.jpg" alt="Sam Forsberg">
+          <div class="about-image-frame">
+            <img src="resources/sam.jpg" alt="Sam Forsberg">
+            <div class="about-image-glow"></div>
+            <div class="about-image-overlay">
+              <div class="about-overlay-line"></div>
+              <span class="about-overlay-label">Active projects: 3</span>
+            </div>
+          </div>
         </div>
+
         <div class="about-text reveal reveal-right">
           <p class="intro-text">
-            Hey! I'm Sam - a mechanical engineer specializing in advanced additive manufacturing solutions.
-            With over 3 years of professional experience and almost 10 years of personal experience, I bridge the gap between digital design and physical production.
+            Hey, I’m Sam. I’m a mechanical engineer who spends a lot of time
+            building, tuning, and breaking things on purpose. With almost a decade
+            of 3D printing experience and several years of professional work, I’m
+            comfortable owning the loop from sketch to parametric model to test print
+            to final assembly.
           </p>
 
+          <div class="about-timeline">
+            <div class="timeline-item">
+              <span class="timeline-pill">Additive manufacturing</span>
+              <p>
+                Designed and tuned high-speed FDM systems, custom toolheads, and print
+                profiles for reliable, repeatable results instead of one-off “hero” prints.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-pill">Embedded & IoT</span>
+              <p>
+                Built connected devices with low-power microcontrollers, sub-GHz radios,
+                and custom PCBs, making sure they survive real job sites, not just dev benches.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-pill">Rapid prototyping</span>
+              <p>
+                Short loops: design, print, test, iterate. I care as much about fixtures,
+                jigs, and stress points as I do about the final part.
+              </p>
+            </div>
+          </div>
+
           <div class="expertise">
-            <h3>Core Expertise</h3>
+            <h3>Core expertise</h3>
             <ul>
-              <li>High-speed FDM/FFF systems optimization</li>
-              <li>IoT devices</li>
-              <li>Low frequency devices</li>
-              <li>Custom printer firmware development</li>
+              <li>High-speed FDM/FFF system design & tuning</li>
+              <li>IoT devices, sub-GHz RF, and antenna-aware enclosures</li>
+              <li>Custom printer firmware, automation, and diagnostics</li>
             </ul>
           </div>
 
@@ -243,53 +407,88 @@
             <div class="skill">CAD Design</div>
             <div class="skill">Klipper Expert</div>
             <div class="skill">Python Automation</div>
-            <div class="skill">PCB design</div>
-            <div class="skill">PL300 Certified</div>
-            <div class="skill">Solidworks CSWP</div>
-            <div class="skill">225 Bench</div>
+            <div class="skill">PCB Design</div>
+            <div class="skill">SolidWorks</div>
+            <div class="skill">Hands-on Prototyping</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ✨ Divider -->
+  <!-- Divider -->
   <div class="section-divider" aria-hidden="true"></div>
 
-  <!-- CONTACT (anchor target for nav) -->
-  <section id="contact" class="contact">
+  <!-- CONTACT -->
+  <section id="contact" class="contact scroll-section">
+    <div class="section-bg-accent section-bg-accent--center"></div>
+
     <div class="contact-content">
-      <h2 class="section-title reveal reveal-up">Contact</h2>
+      <div class="section-meta reveal reveal-left">
+        <span class="section-meta-label">03</span>
+        <span class="section-meta-line"></span>
+        <span class="section-meta-text">Contact & collaboration</span>
+      </div>
+
+      <h2 class="section-title reveal reveal-up">Let’s Build Something</h2>
       <p class="contact-text reveal reveal-up" style="--d:90ms">
-        Want to collaborate or have a project in mind? Let’s talk.
+        Have a printer to tune, a device to prototype, or a weird idea to validate?
+        I’m always open to new projects and collaborations.
       </p>
-      <div class="contact-methods reveal reveal-up" style="--d:180ms">
-        <a href="mailto:sam@forsberg3d.com" class="project-link"><i class="fas fa-envelope"></i>   Email Me</a>
-        <a href="https://github.com/samforsberg" target="_blank" class="project-link"><i class="fab fa-github"></i>   GitHub</a>
-        <a href="https://linkedin.com/in/samforsberg06" target="_blank" class="project-link"><i class="fab fa-linkedin"></i>   LinkedIn</a>
+
+      <div class="contact-grid">
+        <div class="contact-card reveal reveal-up" style="--d:140ms">
+          <h3>Best way to reach me</h3>
+          <p>
+            Send a quick note with what you’re working on and what you’d like help with.
+          </p>
+          <a href="mailto:sam@forsberg3d.com" class="project-link">
+            <i class="fas fa-envelope"></i> Email Me
+          </a>
+          <div class="contact-meta-note">
+            <span class="contact-pill">Typical response: &lt; 24 hours</span>
+          </div>
+        </div>
+
+        <div class="contact-card reveal reveal-up" style="--d:190ms">
+          <h3>Where I build</h3>
+          <p>
+            You can also find my work, configs, and experiments here:
+          </p>
+          <div class="contact-methods">
+            <a href="https://github.com/samforsberg" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://linkedin.com/in/samforsberg06" target="_blank" class="project-link">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER (thin layout; your style.css controls spacing) -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-brand">
         <img src="resources/logo.png" alt="Sam Forsberg Logo" class="logo-img" />
-        <span class="footer-logo">Sam Forsberg</span>
-        <p>Pushing the boundaries of additive manufacturing</p>
+        <div>
+          <span class="footer-logo">Sam Forsberg</span>
+          <p>Pushing the boundaries of additive manufacturing.</p>
+        </div>
       </div>
       <div class="footer-contact">
         <div class="social-box">
-          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label=" LinkedIn">
+          <a href="https://www.linkedin.com/in/samforsberg2006/" target="_blank" aria-label="LinkedIn">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://github.com/samforsberg" target="_blank" aria-label=" GitHub">
+          <a href="https://github.com/samforsberg" target="_blank" aria-label="GitHub">
             <i class="fab fa-github"></i>
           </a>
         </div>
         <div class="email-box">
-          <a href="mailto:sam@forsberg3d.com" class="contact-link">
+          <a href="mailto:samforsberg@outlook.com" class="contact-link">
             <i class="fas fa-envelope"></i> samforsberg@outlook.com
           </a>
         </div>
